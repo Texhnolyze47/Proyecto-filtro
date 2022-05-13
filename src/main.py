@@ -1,4 +1,7 @@
 # This is a sample Python script.
+from tkinter import filedialog
+
+import filetype as filetype
 import pandas as pd
 import serial
 import serial.tools.list_ports
@@ -112,7 +115,7 @@ def graficador(datos):
 
     plt.show()
 
-def interfaz():
+def interfaz(datos):
     # creamos la ventana
     ventana = Tk()
     # le damos nombre de la ventanna
@@ -131,14 +134,13 @@ def interfaz():
     fileMenu.add_command(label="Abrir", command=abrir_archivo)
     fileMenu.add_command(label="Exit", command=quit)
 
-
-
-
+    graficador(df)
 
     ventana.mainloop()
 
 def abrir_archivo():
-    print('Entro')
+    archivo = filedialog.askopenfilename(initialdir='c:/', title='Seleccione archivo', filetype=(('xlsx files','*.xlsx'),('All files','*.*')))
+    return archivo
 
 
 if __name__ == '__main__':
@@ -153,14 +155,13 @@ if __name__ == '__main__':
     except:
         print("La conexion fallo")
 
-interfaz();
 
 column = ['nodo1', 'nodo2', 'nodo3', 'nodo4', 'nodo5', 'nodo6', 'nodo7',
           'nodo8', 'nodo9', 'nodo10', 'nodo11', 'nodo12', 'nodo13', 'nodo14']
 
-
-
-df = pd.read_excel("data/datos_128hz.xlsx", header=None, names=column)
+df = pd.read_excel(abrir_archivo(), header=None, names=column)
 print(df)
 
-graficador(df)
+interfaz(df);
+
+
