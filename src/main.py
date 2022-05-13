@@ -1,7 +1,6 @@
 # This is a sample Python script.
 from tkinter import filedialog
 
-import filetype as filetype
 import pandas as pd
 import serial
 import serial.tools.list_ports
@@ -53,7 +52,6 @@ def conectar_arduino(ports_encontrados):
 
 def graficador(datos):
     # variable que va a graficar
-
     x1 = list(datos['nodo1'])
     x2 = list(datos['nodo2'])
     x3 = list(datos['nodo3'])
@@ -68,9 +66,9 @@ def graficador(datos):
     x12 = list(datos['nodo12'])
     x13 = list(datos['nodo13'])
     x14 = list(datos['nodo14'])
-
+    # layout
     figure, axis = plt.subplots(5, 3)
-
+    # posiciones y data a graficar
     axis[0, 0].plot(x1)
     axis[0, 0].set_title('nodo 1')
 
@@ -115,7 +113,8 @@ def graficador(datos):
 
     plt.show()
 
-def interfaz(datos):
+
+def interfaz():
     # creamos la ventana
     ventana = Tk()
     # le damos nombre de la ventanna
@@ -134,18 +133,37 @@ def interfaz(datos):
     fileMenu.add_command(label="Abrir", command=abrir_archivo)
     fileMenu.add_command(label="Exit", command=quit)
 
-    graficador(df)
-
     ventana.mainloop()
 
+
+
+
+def encode_send(ard, data):
+    #print(f"enviar: {data}")
+    enc = f"{data}\n".encode("UTF-8")
+    print(f"enviar: {data}")
+
+    ard.write(enc)
+
+def decode_response(ard):
+    linea = ard.readline()
+    respuesta = linea.decode()
+    print("Tipo de variable", linea)
+    print("Tipo de variable", respuesta)
+    return respuesta
+
+
 def abrir_archivo():
-    archivo = filedialog.askopenfilename(initialdir='c:/', title='Seleccione archivo', filetype=(('xlsx files','*.xlsx'),('All files','*.*')))
+
+    archivo = filedialog.askopenfilename(initialdir='c:/', title='Seleccione archivo',
+                                         filetype=(('xlsx files', '*.xlsx'), ('All files', '*.*')))
     return archivo
 
 
 if __name__ == '__main__':
-
+    # objecto con la info de la conexion de arduino
     portsEncontrados = get_ports()
+    # variable con el puerto que va utlizar arduino para conectarse con la pc
     port_arduino = conectar_arduino(portsEncontrados)
 
     try:
@@ -155,13 +173,15 @@ if __name__ == '__main__':
     except:
         print("La conexion fallo")
 
-
 column = ['nodo1', 'nodo2', 'nodo3', 'nodo4', 'nodo5', 'nodo6', 'nodo7',
           'nodo8', 'nodo9', 'nodo10', 'nodo11', 'nodo12', 'nodo13', 'nodo14']
 
-df = pd.read_excel(abrir_archivo(), header=None, names=column)
-print(df)
+interfaz()
 
-interfaz(df);
+df = pd.read_excel(abrir_archivo(), header=None, names=column)
+
+
+
+
 
 
