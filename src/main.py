@@ -112,7 +112,33 @@ def graficador(datos):
 
     plt.show()
 
+def interfaz():
+    # creamos la ventana
+    ventana = Tk()
+    # le damos nombre de la ventanna
+    ventana.title("prueba de interfaz")
+    # le damos un tamaño a la ventana
+    ventana.geometry("400x200")
+    # creamos barra de menu
+    menubar = Menu(ventana)
+    ventana.config(menu=menubar)
 
+    fileMenu = Menu(menubar, tearoff=0)
+    # añade el efecto de cascada
+    menubar.add_cascade(label="Archivo", menu=fileMenu)
+    # ponemos opcion a la cinta de opciones
+
+    fileMenu.add_command(label="Abrir", command=abrir_archivo)
+    fileMenu.add_command(label="Exit", command=quit)
+
+
+
+
+
+    ventana.mainloop()
+
+def abrir_archivo():
+    print('Entro')
 
 
 if __name__ == '__main__':
@@ -127,7 +153,7 @@ if __name__ == '__main__':
     except:
         print("La conexion fallo")
 
-#interfaz();
+interfaz();
 
 column = ['nodo1', 'nodo2', 'nodo3', 'nodo4', 'nodo5', 'nodo6', 'nodo7',
           'nodo8', 'nodo9', 'nodo10', 'nodo11', 'nodo12', 'nodo13', 'nodo14']
