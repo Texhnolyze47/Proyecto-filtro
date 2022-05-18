@@ -1,5 +1,8 @@
+from tkinter import filedialog
+
 from model import Model
 from view import View
+
 
 
 class Controller:
@@ -11,7 +14,13 @@ class Controller:
     def main(self):
         # llama a la interfaz grafica
         self.view.main()
-        print('Hola mundo desde el controller')
+
+
+    def cargar_archivo(self):
+        self.model.abrir_archivo()
+
+        #llama a la funcion abrir archivo en model
+
 
 
 if __name__ == '__main__':

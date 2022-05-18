@@ -36,9 +36,11 @@ class View(tk.Tk):
         self.config(menu=menu_bar)
         file_menu = Menu(menu_bar, tearoff=0)
         menu_bar.add_cascade(label="Archivo", menu=file_menu)
-        file_menu.add_cascade(label="Abrir")
+        file_menu.add_cascade(label="Abrir", command=self.abrir_archivo)
         file_menu.add_cascade(label="Exit", command=quit)
 
+    def abrir_archivo(self):
+        self.controller.cargar_archivo()
 
 
     # def _setup_layout(self):
