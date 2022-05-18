@@ -1,5 +1,4 @@
 # This is a sample Python script.
-from tkinter import filedialog
 
 import pandas as pd
 import serial
@@ -50,7 +49,9 @@ def conectar_arduino(ports_encontrados):
 # funcion que grafica
 
 
-def graficador(datos):
+def graficador():
+    datos = pd.read_excel(abrir_archivo()).head()
+
     # variable que va a graficar
     x1 = list(datos['nodo1'])
     x2 = list(datos['nodo2'])
@@ -116,7 +117,6 @@ def graficador(datos):
 
 def interfaz():
     # creamos la ventana
-    ventana = Tk()
     # le damos nombre de la ventanna
     ventana.title("prueba de interfaz")
     # le damos un tamaño a la ventana
@@ -132,6 +132,9 @@ def interfaz():
 
     fileMenu.add_command(label="Abrir", command=abrir_archivo)
     fileMenu.add_command(label="Exit", command=quit)
+
+
+    graficador()
 
     ventana.mainloop()
 
@@ -167,18 +170,22 @@ if __name__ == '__main__':
     port_arduino = conectar_arduino(portsEncontrados)
 
     try:
-        ser = serial.Serial(port_arduino, 9600, timeout=1)
+        ser = serial.Serial(port_arduino, 57600, timeout=1)
         print('Arduino conectado', port_arduino)
         print('Conexion Hecha')
     except:
         print("La conexion fallo")
 
-column = ['nodo1', 'nodo2', 'nodo3', 'nodo4', 'nodo5', 'nodo6', 'nodo7',
-          'nodo8', 'nodo9', 'nodo10', 'nodo11', 'nodo12', 'nodo13', 'nodo14']
 
-interfaz()
 
-df = pd.read_excel(abrir_archivo(), header=None, names=column)
+
+
+
+
+
+
+
+
 
 
 
