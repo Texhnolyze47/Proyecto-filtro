@@ -1,4 +1,6 @@
 import tkinter as tk
+import matplotlib.pyplot as plt
+
 from tkinter import *
 from tkinter import filedialog
 
@@ -16,17 +18,29 @@ class View(tk.Tk):
         self.controller = controller
 
         self.title("NeuroFiler 0.1")
-        # self._main_frame()
-        # self._make_entry()
+        self._create_widgets()
 
+    #
     def main(self):
         self.mainloop()
 
-    # def _main_frame(self):
-    #     self.main_frm = tk.Frame(self)
-    #     self.main_frm.pack(padx=self.PAD, pady=self.PAD)
+    # Crea varios widgets en la ventana principal
 
-    # def _make_entry(self):
-    #     ent = tk.Entry(self.main_frm)
-    #     ent.pack()
+    def _create_widgets(self):
+        # Crea el frame
+        self.window = tk.Frame(self)
+        # Le da un tamaño al frame
+        self.geometry("1200x720")
+        # Crea la cinta de opciones
+        menu_bar = Menu(self)
+        self.config(menu=menu_bar)
+        file_menu = Menu(menu_bar, tearoff=0)
+        menu_bar.add_cascade(label="Archivo", menu=file_menu)
+        file_menu.add_cascade(label="Abrir")
+        file_menu.add_cascade(label="Exit", command=quit)
+
+
+
+    # def _setup_layout(self):
+
 
