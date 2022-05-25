@@ -8,7 +8,21 @@ import matplotlib.pyplot as plt
 from tkinter import *
 
 
+def abrir_archivo():
+    # column = ['nodo1', 'nodo2', 'nodo3', 'nodo4', 'nodo5', 'nodo6', 'nodo7',
+    #           'nodo8', 'nodo9', 'nodo10', 'nodo11', 'nodo12', 'nodo13', 'nodo14']
+
+    archivo = filedialog.askopenfilename(initialdir='c:/', title='Seleccione archivo',
+                                         filetype=(('xlsx files', '*.xlsx'), ('All files', '*.*')))
+
+    #df = pd.read_excel(archivo, header=None, names=column)
+
+    return archivo
+
+
+
 # esta funcion simplemente regresa el puerto que usa el arduino para conectarse
+
 
 
 def get_ports():
@@ -116,39 +130,38 @@ def graficador():
     plt.show()
 
 
-def interfaz():
+def interfaz(ard):
     # creamos la ventana
     ventana = Tk()
     # le damos nombre de la ventanna
     ventana.title("prueba de interfaz")
     # le damos un tamaño a la ventana
-    ventana.geometry("400x200")
-    # creamos barra de menu
-    menubar = Menu(ventana)
-    ventana.config(menu=menubar)
+    ventana.geometry("1280x720")
+    # Creamos un boton
+    abrir_boton = Button(ventana, text="Abrir Archivo", command=abrir_archivo)
+    # Le damos una posicion al boton
+    abrir_boton.place(relx=0.5, rely=0.5, width=250, height=100)
 
-    fileMenu = Menu(menubar, tearoff=0)
-    # añade el efecto de cascada
-    menubar.add_cascade(label="Archivo", menu=fileMenu)
-    # ponemos opcion a la cinta de opciones
+    column = ['nodo1', 'nodo2', 'nodo3', 'nodo4', 'nodo5', 'nodo6', 'nodo7',
+              'nodo8', 'nodo9', 'nodo10', 'nodo11', 'nodo12', 'nodo13', 'nodo14']
 
-    fileMenu.add_command(label="Abrir", command=abrir_archivo)
-    fileMenu.add_command(label="Exit", command=quit)
+    df = pd.read_excel("C:\\Users\\Ivan\\PycharmProjects\\pythonProject\\data\\datos_128hz.xlsx", names=column)
 
+    graficador(df)
 
-    graficador()
+    encode_send(ard, df)
+
 
     ventana.mainloop()
 
 
-
-
 def encode_send(ard, data):
-    #print(f"enviar: {data}")
+    # print(f"enviar: {data}")
     enc = f"{data}\n".encode("UTF-8")
     print(f"enviar: {data}")
 
     ard.write(enc)
+
 
 def decode_response(ard):
     linea = ard.readline()
@@ -158,11 +171,7 @@ def decode_response(ard):
     return respuesta
 
 
-def abrir_archivo():
 
-    archivo = filedialog.askopenfilename(initialdir='c:/', title='Seleccione archivo',
-                                         filetype=(('xlsx files', '*.xlsx'), ('All files', '*.*')))
-    return archivo
 
 
 if __name__ == '__main__':
@@ -181,10 +190,7 @@ if __name__ == '__main__':
 
 
 
-
-
-
-
+    interfaz(ser)
 
 
 
