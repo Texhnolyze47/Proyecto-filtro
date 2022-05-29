@@ -9,13 +9,23 @@ from tkinter import *
 
 archivoRuta = []
 
+def ventana_graficos():
+    nueva_ventana = Tk()
+    ventana.destroy()
+    # Le da nombre a la segunda ventana
+    nueva_ventana.title("NeuralFilter")
+
+    nueva_ventana.geometry("1280x720")
+
+
 
 def abrir_archivo():
-    archivo = filedialog.askopenfilename(initialdir='c:/', title='Seleccione archivo',
+    archivo = filedialog.askopenfilename(initialdir='c:/',
+                                         title='Seleccione archivo',
                                          filetypes=(('xlsx files', '*.xlsx'), ('All files', '*.*')))
     archivoRuta.append(archivo)
     print(archivo)
-
+    ventana_graficos()
 
 # esta funcion simplemente regresa el puerto que usa el arduino para conectarse
 
@@ -124,27 +134,9 @@ def graficador():
 
     plt.show()
 
+#
+# def ventana_archivo():
 
-def interfaz():
-    # creamos la ventana
-    ventana = Tk()
-    # le damos nombre de la ventanna
-    ventana.title("prueba de interfaz")
-    # le damos un tamaño a la ventana
-    ventana.geometry("1280x720")
-    # Creamos un boton
-    abrir_boton = Button(ventana, text="Abrir Archivo", command=abrir_archivo)
-    # Le damos una posicion al boton
-    abrir_boton.place(relx=0.5, rely=0.5, width=250, height=100)
-
-
-    # df = pd.read_excel(archivoRuta)
-    #
-    # graficador(df)
-    #
-    # encode_send(ard, df)
-
-    ventana.mainloop()
 
 
 def encode_send(ard, data):
@@ -177,6 +169,26 @@ if __name__ == '__main__':
     # variable con el puerto que va utlizar arduino para conectarse con la pc
     port_arduino = conectar_arduino(portsEncontrados)
 
-    interfaz()
+    # creamos la ventana
+    ventana = Tk()
+    # le damos nombre de la ventanna
+    ventana.title("Abrir archivo")
+    # le damos un tamaño a la ventana
+    ventana.geometry("1280x720")
+    # Establecer el grosor de la fila
+    # y la columna en la que se encuentra el widget
+    ventana.columnconfigure(0, weight=1)
+    ventana.rowconfigure(0, weight=1)
+
+    contenedor = Frame(ventana)
+    # Establecer el grosor de la columna
+    contenedor.grid(row=0, column=0)
+
+    # Creamos un boton
+    abrir_boton = Button(contenedor, text="Abrir Archivo", command=abrir_archivo, width=15, height=5)
+    abrir_boton.grid(pady=10, padx=20)
+
+
+    ventana.mainloop()
 
     conexion()
