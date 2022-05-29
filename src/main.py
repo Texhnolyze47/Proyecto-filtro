@@ -7,22 +7,17 @@ import serial.tools.list_ports
 import matplotlib.pyplot as plt
 from tkinter import *
 
+archivoRuta = []
+
 
 def abrir_archivo():
-    # column = ['nodo1', 'nodo2', 'nodo3', 'nodo4', 'nodo5', 'nodo6', 'nodo7',
-    #           'nodo8', 'nodo9', 'nodo10', 'nodo11', 'nodo12', 'nodo13', 'nodo14']
-
     archivo = filedialog.askopenfilename(initialdir='c:/', title='Seleccione archivo',
-                                         filetype=(('xlsx files', '*.xlsx'), ('All files', '*.*')))
-
-    #df = pd.read_excel(archivo, header=None, names=column)
-
-    return archivo
-
+                                         filetypes=(('xlsx files', '*.xlsx'), ('All files', '*.*')))
+    archivoRuta.append(archivo)
+    print(archivo)
 
 
 # esta funcion simplemente regresa el puerto que usa el arduino para conectarse
-
 
 
 def get_ports():
@@ -130,7 +125,7 @@ def graficador():
     plt.show()
 
 
-def interfaz(ard):
+def interfaz():
     # creamos la ventana
     ventana = Tk()
     # le damos nombre de la ventanna
@@ -142,15 +137,12 @@ def interfaz(ard):
     # Le damos una posicion al boton
     abrir_boton.place(relx=0.5, rely=0.5, width=250, height=100)
 
-    column = ['nodo1', 'nodo2', 'nodo3', 'nodo4', 'nodo5', 'nodo6', 'nodo7',
-              'nodo8', 'nodo9', 'nodo10', 'nodo11', 'nodo12', 'nodo13', 'nodo14']
 
-    df = pd.read_excel("C:\\Users\\Ivan\\PycharmProjects\\pythonProject\\data\\datos_128hz.xlsx", names=column)
-
-    graficador(df)
-
-    encode_send(ard, df)
-
+    # df = pd.read_excel(archivoRuta)
+    #
+    # graficador(df)
+    #
+    # encode_send(ard, df)
 
     ventana.mainloop()
 
@@ -171,15 +163,7 @@ def decode_response(ard):
     return respuesta
 
 
-
-
-
-if __name__ == '__main__':
-    # objecto con la info de la conexion de arduino
-    portsEncontrados = get_ports()
-    # variable con el puerto que va utlizar arduino para conectarse con la pc
-    port_arduino = conectar_arduino(portsEncontrados)
-
+def conexion():
     try:
         ser = serial.Serial(port_arduino, 57600, timeout=1)
         print('Arduino conectado', port_arduino)
@@ -187,16 +171,12 @@ if __name__ == '__main__':
     except:
         print("La conexion fallo")
 
+if __name__ == '__main__':
+    # objecto con la info de la conexion de arduino
+    portsEncontrados = get_ports()
+    # variable con el puerto que va utlizar arduino para conectarse con la pc
+    port_arduino = conectar_arduino(portsEncontrados)
 
+    interfaz()
 
-
-    interfaz(ser)
-
-
-
-
-
-
-
-
-
+    conexion()
