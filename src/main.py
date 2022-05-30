@@ -5,9 +5,35 @@ import pandas as pd
 import serial
 import serial.tools.list_ports
 import matplotlib.pyplot as plt
+import seaborn as sns
 from tkinter import *
 
+# ruta del archivo
 archivoRuta = []
+
+# creamos la ventana
+ventana = Tk()
+
+
+def ventana_boton():
+    # le damos nombre de la ventanna
+    ventana.title("Abrir archivo")
+    # le damos un tamaño a la ventana
+    ventana.geometry("1280x720")
+    # Establecer el grosor de la fila
+    # y la columna en la que se encuentra el widget
+    ventana.columnconfigure(0, weight=1)
+    ventana.rowconfigure(0, weight=1)
+
+    contenedor = Frame(ventana)
+    # Establecer el grosor de la columna
+    contenedor.grid(row=0, column=0)
+
+    # Creamos un boton
+    abrir_boton = Button(contenedor, text="Abrir Archivo", command=abrir_archivo, width=15, height=5)
+    abrir_boton.grid(pady=10, padx=20)
+
+    ventana.mainloop()
 
 
 def ventana_graficos():
@@ -17,9 +43,7 @@ def ventana_graficos():
     nueva_ventana.title("NeuralFilter")
 
     nueva_ventana.geometry("1280x720")
-
-
-
+    graficador_searborn()
 
 
 def abrir_archivo():
@@ -27,8 +51,9 @@ def abrir_archivo():
                                          title='Seleccione archivo',
                                          filetypes=(('xlsx files', '*.xlsx'), ('All files', '*.*')))
     archivoRuta.append(archivo)
-    print(archivo)
     ventana_graficos()
+
+
 
 
 # esta funcion simplemente regresa el puerto que usa el arduino para conectarse
@@ -140,6 +165,18 @@ def graficador_matploy():
     plt.show()
 
 
+def graficador_searborn():
+    print("Entro al graficador")
+
+    column = ['nodo1', 'nodo2', 'nodo3', 'nodo4', 'nodo5', 'nodo6', 'nodo7',
+              'nodo8', 'nodo9', 'nodo10', 'nodo11', 'nodo12', 'nodo13', 'nodo14']
+    ruta = ""
+    datos = pd.read_excel(ruta.join(archivoRuta), names=column)
+    x1 = list(datos['nodo1'])
+    x2 = list(datos['nodo2'])
+    sns.set(style="dark")
+    plt.plot(x1, x2)
+    print(datos)
 
 
 
@@ -174,26 +211,8 @@ if __name__ == '__main__':
     # variable con el puerto que va utlizar arduino para conectarse con la pc
     port_arduino = conectar_arduino(portsEncontrados)
 
-    # creamos la ventana
-    ventana = Tk()
-    # le damos nombre de la ventanna
-    ventana.title("Abrir archivo")
-    # le damos un tamaño a la ventana
-    ventana.geometry("1280x720")
-    # Establecer el grosor de la fila
-    # y la columna en la que se encuentra el widget
-    ventana.columnconfigure(0, weight=1)
-    ventana.rowconfigure(0, weight=1)
-
-    contenedor = Frame(ventana)
-    # Establecer el grosor de la columna
-    contenedor.grid(row=0, column=0)
-
-    # Creamos un boton
-    abrir_boton = Button(contenedor, text="Abrir Archivo", command=abrir_archivo, width=15, height=5)
-    abrir_boton.grid(pady=10, padx=20)
-
     conexion()
 
-    ventana.mainloop()
+    ventana_boton()
+    ventana_graficos()
 
