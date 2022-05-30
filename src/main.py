@@ -9,6 +9,7 @@ from tkinter import *
 
 archivoRuta = []
 
+
 def ventana_graficos():
     nueva_ventana = Tk()
     ventana.destroy()
@@ -19,6 +20,8 @@ def ventana_graficos():
 
 
 
+
+
 def abrir_archivo():
     archivo = filedialog.askopenfilename(initialdir='c:/',
                                          title='Seleccione archivo',
@@ -26,6 +29,7 @@ def abrir_archivo():
     archivoRuta.append(archivo)
     print(archivo)
     ventana_graficos()
+
 
 # esta funcion simplemente regresa el puerto que usa el arduino para conectarse
 
@@ -69,10 +73,11 @@ def conectar_arduino(ports_encontrados):
 # funcion que grafica
 
 
-def graficador():
+def graficador_matploy():
     datos = pd.read_excel(abrir_archivo()).head()
 
     # variable que va a graficar
+
     x1 = list(datos['nodo1'])
     x2 = list(datos['nodo2'])
     x3 = list(datos['nodo3'])
@@ -134,8 +139,7 @@ def graficador():
 
     plt.show()
 
-#
-# def ventana_archivo():
+
 
 
 
@@ -157,11 +161,12 @@ def decode_response(ard):
 
 def conexion():
     try:
-        ser = serial.Serial(port_arduino, 57600, timeout=1)
+        ser = serial.Serial(port_arduino, 9600, timeout=1)
         print('Arduino conectado', port_arduino)
         print('Conexion Hecha')
     except:
         print("La conexion fallo")
+
 
 if __name__ == '__main__':
     # objecto con la info de la conexion de arduino
@@ -188,7 +193,7 @@ if __name__ == '__main__':
     abrir_boton = Button(contenedor, text="Abrir Archivo", command=abrir_archivo, width=15, height=5)
     abrir_boton.grid(pady=10, padx=20)
 
+    conexion()
 
     ventana.mainloop()
 
-    conexion()
