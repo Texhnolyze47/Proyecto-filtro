@@ -9,6 +9,9 @@ import seaborn as sns
 from tkinter import *
 
 # ruta del archivo
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from plotly.graph_objs import Figure
+
 archivoRuta = []
 
 # creamos la ventana
@@ -54,8 +57,6 @@ def abrir_archivo():
     ventana_graficos()
 
 
-
-
 # esta funcion simplemente regresa el puerto que usa el arduino para conectarse
 
 
@@ -99,84 +100,27 @@ def conectar_arduino(ports_encontrados):
 
 
 def graficador_matploy():
-    datos = pd.read_excel(abrir_archivo()).head()
+    print("Entro al graficador")
 
-    # variable que va a graficar
+    ruta = ""
+    # datos = pd.read_excel(ruta.join(archivoRuta))
 
-    x1 = list(datos['nodo1'])
-    x2 = list(datos['nodo2'])
-    x3 = list(datos['nodo3'])
-    x4 = list(datos['nodo4'])
-    x5 = list(datos['nodo5'])
-    x6 = list(datos['nodo6'])
-    x7 = list(datos['nodo7'])
-    x8 = list(datos['nodo8'])
-    x9 = list(datos['nodo9'])
-    x10 = list(datos['nodo10'])
-    x11 = list(datos['nodo11'])
-    x12 = list(datos['nodo12'])
-    x13 = list(datos['nodo13'])
-    x14 = list(datos['nodo14'])
-    # layout
-    figure, axis = plt.subplots(5, 3)
-    # posiciones y data a graficar
-    axis[0, 0].plot(x1)
-    axis[0, 0].set_title('nodo 1')
+    df = pd.read_excel(ruta.join(archivoRuta))
 
-    axis[0, 1].plot(x2)
-    axis[0, 1].set_title('nodo 2')
-
-    axis[0, 2].plot(x3)
-    axis[0, 2].set_title('nodo 3')
-
-    axis[1, 0].plot(x4)
-    axis[1, 0].set_title('nodo 4')
-
-    axis[1, 1].plot(x5)
-    axis[1, 1].set_title('nodo 5')
-
-    axis[1, 2].plot(x6)
-    axis[1, 2].set_title('nodo 6')
-
-    axis[2, 0].plot(x7)
-    axis[2, 0].set_title('nodo 7')
-
-    axis[2, 1].plot(x8)
-    axis[2, 1].set_title('nodo 8')
-
-    axis[2, 2].plot(x9)
-    axis[2, 2].set_title('nodo 9')
-
-    axis[3, 0].plot(x10)
-    axis[3, 0].set_title('nodo 10')
-
-    axis[3, 1].plot(x11)
-    axis[3, 1].set_title('nodo 11')
-
-    axis[3, 2].plot(x12)
-    axis[3, 2].set_title('nodo 12')
-
-    axis[4, 0].plot(x13)
-    axis[4, 0].set_title('nodo 13')
-
-    axis[4, 1].plot(x14)
-    axis[4, 1].set_title('nodo 14')
-
+    # ax = column.plot.line(x="Nodos", y="seconds")
     plt.show()
 
 
 def graficador_searborn():
     print("Entro al graficador")
 
-    column = ['nodo1', 'nodo2', 'nodo3', 'nodo4', 'nodo5', 'nodo6', 'nodo7',
-              'nodo8', 'nodo9', 'nodo10', 'nodo11', 'nodo12', 'nodo13', 'nodo14']
     ruta = ""
-    datos = pd.read_excel(ruta.join(archivoRuta), names=column)
-    x1 = list(datos['nodo1'])
-    x2 = list(datos['nodo2'])
-    sns.set(style="dark")
-    plt.plot(x1, x2)
-    print(datos)
+    datos = pd.read_excel(ruta.join(archivoRuta))
+    nuevosDatos = datos[['Nodo1','Nodo2','Nodo3','Nodo4','Nodo5','Nodo6','Nodo7','Nodo8','Nodo9','Nodo10','Nodo11','Nodo12',
+    'Nodo13','Nodo14']]
+
+    nuevosDatos.plot()
+    plt.show()
 
 
 
@@ -215,4 +159,3 @@ if __name__ == '__main__':
 
     ventana_boton()
     ventana_graficos()
-
