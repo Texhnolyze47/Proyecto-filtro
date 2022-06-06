@@ -46,7 +46,11 @@ def ventana_graficos():
     nueva_ventana.title("NeuralFilter")
 
     nueva_ventana.geometry("1280x720")
-    graficador_searborn()
+    fig = graficador_searborn()
+
+    canvas = FigureCanvasTkAgg(fig, master=nueva_ventana)
+    canvas.draw()
+    canvas.get_tk_widget().pack()
 
 
 def abrir_archivo():
@@ -119,8 +123,10 @@ def graficador_searborn():
     nuevosDatos = datos[['Nodo1','Nodo2','Nodo3','Nodo4','Nodo5','Nodo6','Nodo7','Nodo8','Nodo9','Nodo10','Nodo11','Nodo12',
     'Nodo13','Nodo14']]
 
-    nuevosDatos.plot()
-    plt.show()
+    fig = plt.figure()
+    plt.plot(nuevosDatos)
+    return fig
+
 
 
 
