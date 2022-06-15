@@ -8,7 +8,6 @@ from src.conexion import *
 
 
 def graficador_searborn():
-    print("Entro al graficador")
     # variabla para colocar la ruta del archivo
     ruta = ""
     # variable para conseguir la ruta del archivo
@@ -19,11 +18,7 @@ def graficador_searborn():
     fig, axes = plt.subplots(4,4)
     for ax,i in zip(axes.ravel(), nuevosDatos.columns[1:]):
         g = sns.lineplot(x='Nodo1', y = i, ax=ax, data=nuevosDatos)
-    # for i in range(1, 14):
-    #     ax = fig.add_subplot(4, 4, i)
-    #     ax.plot(nuevosDatos)
-    # ax.set_xlabel("Nodos")
-    # ax.set_ylabel("Segundos")
+
 
     fig.suptitle("Sin filtrar")
     fig.tight_layout()

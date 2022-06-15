@@ -14,3 +14,12 @@ El usuario deberá buscar el archivo y el programa enviará los datos a Arduino
 ![img_8.png](img_6.png)
 Despues Saldra una ventana con los datos graficados.
 ![img_9.png](img_9.png)
+
+## Funcionamiento
+![img_10.png](img_10.png)
+Esta parte de codigo se encarga de encontrar el puerto que usa el
+usuario, pero esta limitadoa arduinos originales.
+
+![img_11.png](img_11.png)
+Esta parte del codigo se encarga de graficar los datos 
+sin filtrar
