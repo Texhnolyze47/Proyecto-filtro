@@ -9,7 +9,7 @@ el Arduino y la PC serán programado en Python.
 
 [Manual formato md](docs/manual.md)
 
-[Manual docx](manual.docx)
+[Manual pdf](manual.pdf)
 
 ## Casos de uso
 ![Casos de usos.png](docs/casos_uso.png)
