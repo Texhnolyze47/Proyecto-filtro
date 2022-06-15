@@ -9,8 +9,9 @@ from src.conexion import *
 
 def graficador_searborn():
     print("Entro al graficador")
-
+    # variabla para colocar la ruta del archivo
     ruta = ""
+    # variable para conseguir la ruta del archivo
     datos = pd.read_excel(ruta.join(archivoRuta))
     nuevosDatos = datos[
         ['Nodo1', 'Nodo2', 'Nodo3', 'Nodo4', 'Nodo5', 'Nodo6', 'Nodo7', 'Nodo8', 'Nodo9', 'Nodo10', 'Nodo11', 'Nodo12',
@@ -34,11 +35,13 @@ def graficador_searborn_arduino():
 
     ruta = ""
     ard = conexion()
+
     datos = decode_response(ard)
+    df = pd.DataFrame(datos)
     fig = plt.subplots(4,4)
     for i in range(1, 14):
         ax = fig.add_subplot(4, 4, i)
-        ax.plot(datos)
+        ax.plot(df)
     ax.set_xlabel("Nodos")
     ax.set_ylabel("Segundos")
 

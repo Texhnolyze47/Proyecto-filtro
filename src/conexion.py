@@ -8,6 +8,8 @@ def conexion():
         print('Arduino conectado', port_arduino)
         print('Conexion Hecha')
     except:
+        
         print("La conexion fallo")
+
 
     return ser

@@ -59,11 +59,11 @@ def ventana_graficos():
     nueva_ventana.geometry("1280x720")
 
     fig = graficador_searborn()
-    fig2 = graficador_searborn_arduino()
+    #fig2 = graficador_searborn_arduino()
 
 
 
     canvas = FigureCanvasTkAgg(fig, master=nueva_ventana)
     canvas.get_tk_widget().pack(side=tk.LEFT)
-    canvas2 = FigureCanvasTkAgg(fig2, master=nueva_ventana)
-    canvas2.get_tk_widget().pack(side=tk.RIGHT)
+    #canvas2 = FigureCanvasTkAgg(fig2, master=nueva_ventana)
+    #canvas2.get_tk_widget().pack(side=tk.RIGHT)

@@ -10,6 +10,7 @@ def get_ports():
     # retorna el objecto
     return ports
 
+
 # esta funcion a va regresar el port que utlizar el arduino
 # esta funcion necesita el objeto
 
@@ -36,6 +37,7 @@ def conectar_arduino(ports_encontrados):
             print(comm_port)
     # returna el COM
     return comm_port
+
 
 # objecto con la info de la conexion de arduino
 portsEncontrados = get_ports()
