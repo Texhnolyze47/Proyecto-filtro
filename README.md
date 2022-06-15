@@ -7,6 +7,8 @@ implementado en un microcontrolador en el entorno de desarrollo Arduino. El
 microcontrolador será programado usando C y los procesos de comunicación entre 
 el Arduino y la PC serán programado en Python. 
 
+[Manual](docs/)
+
 ## Casos de uso
 ![Casos de usos.png](docs/casos_uso.png)
 
