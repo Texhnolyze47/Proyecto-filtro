@@ -1,6 +1,9 @@
 import unittest
+from tkinter import filedialog
 
 from src.main import *
+from src.ports import get_ports, conectar_arduino
+
 
 class TestData(unittest.TestCase):
 

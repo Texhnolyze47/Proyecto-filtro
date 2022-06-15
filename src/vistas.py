@@ -3,10 +3,12 @@ from tkinter import filedialog
 
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
-from src.main import archivoRuta, graficador_searborn
+from src.graficacion import *
+from src.main import archivoRuta
 
 # creamos la ventana
 ventana = Tk()
+
 
 def abrir_archivo():
     archivo = filedialog.askopenfilename(initialdir='c:/',
@@ -45,9 +47,8 @@ def ventana_graficos():
 
     nueva_ventana.geometry("1280x720")
     fig = graficador_searborn()
+    # fig2 = graficador_searborn_arduino()
 
     canvas = FigureCanvasTkAgg(fig, master=nueva_ventana)
     canvas.draw()
     canvas.get_tk_widget().pack()
-
-
