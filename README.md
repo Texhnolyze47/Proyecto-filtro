@@ -24,3 +24,15 @@ el Arduino y la PC serán programado en Python.
 ![img_3.png](docs/img_3.png)
 ### Diagrama de Contexto(Nivel 1)
 ![img_5.png](docs/img_5.png)
+
+## Build
+
+Para hacer build de este proyecto debes tener :
+
+- Pycharm
+- arduino ide
+
+1. Debes cargar el archivo .ino mediante arduino ide.
+![img_8.png](docs\img_8.png)
+2. Debes ir al archivo main.py y ejecutar el archivo.
+
