@@ -33,6 +33,6 @@ Para hacer build de este proyecto debes tener :
 - arduino ide
 
 1. Debes cargar el archivo .ino mediante arduino ide.
-![img_8.png](docs\img_8.png)
+![img_8.png](docs/img_8.png)
 2. Debes ir al archivo main.py y ejecutar el archivo.
 
