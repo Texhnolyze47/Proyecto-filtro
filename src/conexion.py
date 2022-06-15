@@ -9,3 +9,5 @@ def conexion():
         print('Conexion Hecha')
     except:
         print("La conexion fallo")
+
+    return ser

@@ -1,3 +1,4 @@
+import tkinter as tk
 from tkinter import *
 from tkinter import filedialog
 
@@ -28,13 +29,19 @@ def ventana_boton():
     ventana.columnconfigure(0, weight=1)
     ventana.rowconfigure(0, weight=1)
 
-    contenedor = Frame(ventana)
-    # Establecer el grosor de la columna
-    contenedor.grid(row=0, column=0)
+
+    # creamos una etiqueta con el nombre del programa
+    nombreEt = Label(ventana,text="NeuralFilter", font=('Arial',15),width=600,height=2 ,bg="grey")
+    nombreEt.pack(side=TOP)
+
 
     # Creamos un boton
-    abrir_boton = Button(contenedor, text="Abrir Archivo", command=abrir_archivo, width=15, height=5)
-    abrir_boton.grid(pady=10, padx=20)
+    abrir_boton = Button(ventana, text="Abrir Archivo", command=abrir_archivo, width=18, bg="grey", height=5)
+    abrir_boton.pack(pady=280, padx=20)
+
+    # creamos una etiqueta con un recordatorio
+    nombreRecuerdo = Label(ventana,text="Asegurese de tener conectado su Arduino", font=('Arial',12),width=40,height=2)
+    nombreRecuerdo.pack(side=BOTTOM)
 
     ventana.mainloop()
 
@@ -45,10 +52,18 @@ def ventana_graficos():
     # Le da nombre a la segunda ventana
     nueva_ventana.title("NeuralFilter")
 
+    # creamos una etiqueta con el nombre del programa
+    nombreEt = Label(nueva_ventana,text="NeuralFilter", font=('Arial',15),width=600,height=2 ,bg="grey")
+    nombreEt.pack(side=TOP)
+
     nueva_ventana.geometry("1280x720")
+
     fig = graficador_searborn()
-    # fig2 = graficador_searborn_arduino()
+    fig2 = graficador_searborn_arduino()
+
+
 
     canvas = FigureCanvasTkAgg(fig, master=nueva_ventana)
-    canvas.draw()
-    canvas.get_tk_widget().pack()
+    canvas.get_tk_widget().pack(side=tk.LEFT)
+    canvas2 = FigureCanvasTkAgg(fig2, master=nueva_ventana)
+    canvas2.get_tk_widget().pack(side=tk.RIGHT)
